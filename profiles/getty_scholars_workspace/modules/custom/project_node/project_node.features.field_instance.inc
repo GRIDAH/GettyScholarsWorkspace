@@ -10,7 +10,7 @@
 function project_node_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-project-body'
+  // Exported field_instance: 'node-project-body'.
   $field_instances['node-project-body'] = array(
     'bundle' => 'project',
     'default_value' => NULL,
@@ -42,7 +42,7 @@ function project_node_field_default_field_instances() {
     'label' => 'Body',
     'required' => 0,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => 0,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -58,14 +58,14 @@ function project_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-field_image'
+  // Exported field_instance: 'node-project-field_image'.
   $field_instances['node-project-field_image'] = array(
     'bundle' => 'project',
     'deleted' => 0,
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'image',
         'settings' => array(
           'field_formatter_class' => '',
@@ -73,7 +73,7 @@ function project_node_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 0,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -123,7 +123,7 @@ function project_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-project-group_access'
+  // Exported field_instance: 'node-project-group_access'.
   $field_instances['node-project-group_access'] = array(
     'bundle' => 'project',
     'default_value' => array(
@@ -136,11 +136,8 @@ function project_node_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'list',
-        'settings' => array(
-          'field_formatter_class' => '',
-        ),
-        'type' => 'list_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 3,
       ),
       'teaser' => array(
@@ -176,7 +173,7 @@ function project_node_field_default_field_instances() {
     'widget_type' => 'options_select',
   );
 
-  // Exported field_instance: 'node-project-group_group'
+  // Exported field_instance: 'node-project-group_group'.
   $field_instances['node-project-group_group'] = array(
     'bundle' => 'project',
     'default_value' => array(
@@ -189,13 +186,9 @@ function project_node_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'og_ui',
-        'settings' => array(
-          'field_formatter_class' => '',
-          'field_name' => FALSE,
-        ),
-        'type' => 'og_group_subscribe',
-        'weight' => 0,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',

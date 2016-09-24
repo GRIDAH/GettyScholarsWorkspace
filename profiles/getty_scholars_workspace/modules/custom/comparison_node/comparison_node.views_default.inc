@@ -24,7 +24,9 @@ function comparison_node_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Comparisons';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['access']['type'] = 'og_context';
+  $handler->display->display_options['access']['perm'] = 'unsubscribe';
+  $handler->display->display_options['access']['group_id_arg'] = '1';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -41,17 +43,6 @@ function comparison_node_views_default_views() {
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Image References */
-  $handler->display->display_options['fields']['field_image_references']['id'] = 'field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['table'] = 'field_data_field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['field'] = 'field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['type'] = 'entityreference_entity_view';
-  $handler->display->display_options['fields']['field_image_references']['settings'] = array(
-    'view_mode' => 'teaser',
-    'links' => 1,
-  );
-  $handler->display->display_options['fields']['field_image_references']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_image_references']['separator'] = ' ';
   /* Field: OG membership: Group ID */
   $handler->display->display_options['fields']['gid']['id'] = 'gid';
   $handler->display->display_options['fields']['gid']['table'] = 'og_membership';
@@ -59,6 +50,21 @@ function comparison_node_views_default_views() {
   $handler->display->display_options['fields']['gid']['relationship'] = 'og_membership_rel';
   $handler->display->display_options['fields']['gid']['exclude'] = TRUE;
   $handler->display->display_options['fields']['gid']['separator'] = '';
+  /* Field: Content: Image Reference Info */
+  $handler->display->display_options['fields']['field_image_reference_info']['id'] = 'field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['table'] = 'field_data_field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['field'] = 'field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['label'] = 'Image References';
+  $handler->display->display_options['fields']['field_image_reference_info']['settings'] = array(
+    'edit' => '',
+    'delete' => '',
+    'add' => '',
+    'description' => 0,
+    'view_mode' => 'full',
+    'field_formatter_class' => '',
+  );
+  $handler->display->display_options['fields']['field_image_reference_info']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_image_reference_info']['separator'] = ' ';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -116,25 +122,27 @@ function comparison_node_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Image Reference Info */
+  $handler->display->display_options['fields']['field_image_reference_info']['id'] = 'field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['table'] = 'field_data_field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['field'] = 'field_image_reference_info';
+  $handler->display->display_options['fields']['field_image_reference_info']['label'] = 'Image References';
+  $handler->display->display_options['fields']['field_image_reference_info']['settings'] = array(
+    'edit' => '',
+    'delete' => '',
+    'add' => '',
+    'description' => 0,
+    'view_mode' => 'full',
+    'field_formatter_class' => '',
+  );
+  $handler->display->display_options['fields']['field_image_reference_info']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_image_reference_info']['separator'] = ' ';
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
   $handler->display->display_options['fields']['nid']['table'] = 'node';
   $handler->display->display_options['fields']['nid']['field'] = 'nid';
   $handler->display->display_options['fields']['nid']['label'] = 'hidden';
   $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
-  /* Field: Content: Image References */
-  $handler->display->display_options['fields']['field_image_references']['id'] = 'field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['table'] = 'field_data_field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['field'] = 'field_image_references';
-  $handler->display->display_options['fields']['field_image_references']['label'] = 'Comparison';
-  $handler->display->display_options['fields']['field_image_references']['type'] = 'entityreference_entity_view';
-  $handler->display->display_options['fields']['field_image_references']['settings'] = array(
-    'view_mode' => 'teaser',
-    'links' => 1,
-    'field_formatter_class' => '',
-  );
-  $handler->display->display_options['fields']['field_image_references']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_image_references']['separator'] = ' ';
   /* Field: OG membership: Group ID */
   $handler->display->display_options['fields']['gid']['id'] = 'gid';
   $handler->display->display_options['fields']['gid']['table'] = 'og_membership';

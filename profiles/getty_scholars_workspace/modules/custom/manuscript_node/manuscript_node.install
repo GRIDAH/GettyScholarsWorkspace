@@ -8,7 +8,6 @@ function manuscript_node_install() {
   $fields = array(
     'body',
     'field_english',
-    'field_facsimile',
     'field_french',
     'field_german',
     'field_hebrew',

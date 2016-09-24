@@ -11,12 +11,12 @@
   Drupal.comparison_reference = Drupal.comparison_reference || {};
 
   Drupal.comparison_reference.QueryString = function () {
-    // This function is anonymous, is executed immediately and 
+    // This function is anonymous, is executed immediately and
     // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
- 
+
     for (var i = 0; i < vars.length; i++) {
       var pair = vars[i].split("=");
         // If first entry with this name
@@ -30,13 +30,13 @@
       } else {
         query_string[pair[0]].push(pair[1]);
       }
-    } 
+    }
     return query_string;
   }
-  
+
   Drupal.comparison_reference.setImage = function(uri, name) {
     var instanceId = Drupal.comparison_reference.QueryString().instanceID;
-    var html = '<a class="colorbox-inline" href="' + Drupal.settings.basePath + uri + '">' + name + '</a>';
+    var html = '<a target="_blank" href="' + Drupal.settings.basePath + uri + '">' + name + '</a>';
 
     window.opener.ParentFunction(instanceId, html);
     window.close();

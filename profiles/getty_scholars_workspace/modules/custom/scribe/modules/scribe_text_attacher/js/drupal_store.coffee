@@ -279,12 +279,12 @@ class Annotator.Plugin.DrupalStore extends Annotator.Plugin
 
           # Create the annotation on the server
           @_apiRequest 'create', annotation_data, (data) =>
-            # Update the annotation with returned data
-            this.updateAnnotation annotation, data
-
             # Update with (e.g.) ID from server.
             if not data.id?
               console.warn Annotator._t("Warning: No ID returned from server for annotation "), annotation
+
+            # Update the annotation with returned data
+            this.updateAnnotation annotation, data
       else
         @_apiRequest 'create', annotation_data, (data) =>
           # Update the annotation with returned data

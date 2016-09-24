@@ -10,62 +10,7 @@
 function image_node_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-image-field_creation_date'
-  $field_instances['node-image-field_creation_date'] = array(
-    'bundle' => 'image',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'field_formatter_class' => '',
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-          'show_remaining_days' => FALSE,
-        ),
-        'type' => 'date_default',
-        'weight' => 2,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field_creation_date',
-    'label' => 'Creation Date',
-    'required' => 0,
-    'settings' => array(
-      'default_value' => 'now',
-      'default_value2' => 'same',
-      'default_value_code' => '',
-      'default_value_code2' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'date',
-      'settings' => array(
-        'increment' => 15,
-        'input_format' => 'Y-m-d H:i:s',
-        'input_format_custom' => '',
-        'label_position' => 'above',
-        'text_parts' => array(),
-        'year_range' => '-3:+3',
-      ),
-      'type' => 'date_text',
-      'weight' => 3,
-    ),
-  );
-
-  // Exported field_instance: 'node-image-field_creator'
+  // Exported field_instance: 'node-image-field_creator'.
   $field_instances['node-image-field_creator'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -73,7 +18,7 @@ function image_node_field_default_field_instances() {
     'description' => 'e.g. Vincent van Gogh, Bernard Picart',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
@@ -107,21 +52,21 @@ function image_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-image-field_description'
+  // Exported field_instance: 'node-image-field_description'.
   $field_instances['node-image-field_description'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Tell us about this object.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
         ),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -132,7 +77,7 @@ function image_node_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_description',
-    'label' => 'Description',
+    'label' => 'Object Description',
     'required' => 0,
     'settings' => array(
       'text_processing' => 0,
@@ -145,19 +90,19 @@ function image_node_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 6,
+      'weight' => 7,
     ),
   );
 
-  // Exported field_instance: 'node-image-field_dimensions'
+  // Exported field_instance: 'node-image-field_dimensions'.
   $field_instances['node-image-field_dimensions'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'e.g. 71 cm x 93 cm, 1532 p. 23 cm',
+    'description' => 'e.g. 71 x 93 cm, 1532 p. 23 cm',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
@@ -191,7 +136,7 @@ function image_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-image-field_image'
+  // Exported field_instance: 'node-image-field_image'.
   $field_instances['node-image-field_image'] = array(
     'bundle' => 'image',
     'deleted' => 0,
@@ -251,11 +196,11 @@ function image_node_field_default_field_instances() {
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',
-      'weight' => 1,
+      'weight' => 0,
     ),
   );
 
-  // Exported field_instance: 'node-image-field_location'
+  // Exported field_instance: 'node-image-field_location'.
   $field_instances['node-image-field_location'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -263,13 +208,13 @@ function image_node_field_default_field_instances() {
     'description' => 'e.g. Getty Research Institute, artist\'s private collection',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
         ),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -293,11 +238,11 @@ function image_node_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 6,
     ),
   );
 
-  // Exported field_instance: 'node-image-field_medium'
+  // Exported field_instance: 'node-image-field_medium'.
   $field_instances['node-image-field_medium'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -305,7 +250,7 @@ function image_node_field_default_field_instances() {
     'description' => 'e.g. gelatin silver paper, pastel, wood',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
@@ -339,7 +284,49 @@ function image_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-image-field_original_node'
+  // Exported field_instance: 'node-image-field_object_creation_date'.
+  $field_instances['node-image-field_object_creation_date'] = array(
+    'bundle' => 'image',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'e.g. c. 1400',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 2,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_object_creation_date',
+    'label' => 'Object Creation Date',
+    'required' => 0,
+    'settings' => array(
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-image-field_original_node'.
   $field_instances['node-image-field_original_node'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -350,7 +337,7 @@ function image_node_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 9,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -361,7 +348,7 @@ function image_node_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_original_node',
-    'label' => 'Original Node',
+    'label' => 'Cropped from',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -369,17 +356,13 @@ function image_node_field_default_field_instances() {
     'widget' => array(
       'active' => 1,
       'module' => 'options',
-      'settings' => array(
-        'match_operator' => 'CONTAINS',
-        'path' => '',
-        'size' => 60,
-      ),
+      'settings' => array(),
       'type' => 'options_select',
       'weight' => 9,
     ),
   );
 
-  // Exported field_instance: 'node-image-field_tags'
+  // Exported field_instance: 'node-image-field_tags'.
   $field_instances['node-image-field_tags'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -393,7 +376,7 @@ function image_node_field_default_field_instances() {
           'field_formatter_class' => '',
         ),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -414,11 +397,11 @@ function image_node_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 11,
+      'weight' => 10,
     ),
   );
 
-  // Exported field_instance: 'node-image-og_group_ref'
+  // Exported field_instance: 'node-image-og_group_ref'.
   $field_instances['node-image-og_group_ref'] = array(
     'bundle' => 'image',
     'default_value' => NULL,
@@ -429,7 +412,7 @@ function image_node_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 8,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -478,19 +461,21 @@ function image_node_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Creation Date');
   t('Creator');
-  t('Description');
+  t('Cropped from');
   t('Dimensions');
   t('Groups audience');
   t('Image');
   t('Location');
   t('Medium');
-  t('Original Node');
+  t('Object Creation Date');
+  t('Object Description');
   t('Tags');
-  t('e.g. 71 cm x 93 cm, 1532 p. 23 cm');
+  t('Tell us about this object.');
+  t('e.g. 71 x 93 cm, 1532 p. 23 cm');
   t('e.g. Getty Research Institute, artist\'s private collection');
   t('e.g. Vincent van Gogh, Bernard Picart');
+  t('e.g. c. 1400');
   t('e.g. gelatin silver paper, pastel, wood');
 
   return $field_instances;

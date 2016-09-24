@@ -12,18 +12,19 @@
 
         $('#dashboard-description').show();
       }
-      
+
 
       $('.flexslider').flexslider({
         animation: "slide",
         animationLoop: true,
+        controlNav: false,
         itemWidth: 115,
         itemMargin: 15,
         slideshow: false,
         smoothHeight: false
       });
 
-  
+
 /*      $('#my-projects-link').mouseenter(function() {
         $('#my-projects-submenu').slideDown();
       });

@@ -53,7 +53,6 @@ function getty_scholars_workspace_install() {
   $features = array(
     'bibliography',
     'bibliography_support',
-    'comparison_display',
     'comparison_node',
     'essay_node',
     'gettysw_annotation_permissions',
@@ -66,9 +65,8 @@ function getty_scholars_workspace_install() {
     'project_dashboard',
     'project_node',
     'shared_field_bases',
-    'sw_theme',
+    'gettysw_theme',
     'timeline',
-    'views_timelinejs_feature',
   );
   features_revert($features);
 

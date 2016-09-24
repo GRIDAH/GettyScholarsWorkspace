@@ -70,6 +70,10 @@ css[jquery.ui.resizable.css][name] = jQuery UI Resizable
 css[jquery.ui.resizable.css][description] = Replace jQuery UI styling
 css[jquery.ui.resizable.css][weight] = -8
 
+; SCRIPTS
+
+scripts[] = js/global.js
+
 ; THEME SETTINGS (DEFAULTS)
 
 settings[alpha_grid] = 'alpha_default'

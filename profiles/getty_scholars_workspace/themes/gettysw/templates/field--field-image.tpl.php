@@ -43,6 +43,7 @@
  *
  * @ingroup themeable
  */
+$gid = (!empty($element['#object']->og_group_ref) ? $element['#object']->og_group_ref[LANGUAGE_NONE][0]['target_id'] : NULL);
 ?>
 <div class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <?php if (!$label_hidden): ?>
@@ -54,6 +55,9 @@
         <?php if (isset($item['colorbox_link'])): ?>
           <div class="field-image-colorbox-link"><?php print $item['colorbox_link']; ?></div>
         <?php endif; ?>
+        <?php if ($element['#object'] == 'image' && og_user_access('node', $gid, 'create annotation') && empty($element['#object']->is_export)): ?>
+          <div class="annotation-help">Click and drag to annotate image.</div>
+        <?php endif ?>
         <?php if (isset($item['caption'])) {
                 $caption = $item['caption'];
                 unset($item['caption']);

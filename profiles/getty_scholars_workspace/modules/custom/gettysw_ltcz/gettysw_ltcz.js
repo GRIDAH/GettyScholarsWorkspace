@@ -9,7 +9,7 @@
       // Get basepath from settings
       basepath = Drupal.settings.cropzoom.basepath;
 
-      // Stuff to do onload. When do we want this to initialize? When they hit a 
+      // Stuff to do onload. When do we want this to initialize? When they hit a
       // certain path.
       var path = window.location.pathname;
       var pattern = /project\/\d+\/lighttable/i;
@@ -103,9 +103,11 @@
       // Only add to light table if it hasn't already been added
       if (_self.currentImages.indexOf(fid) == -1) {
         Drupal.lighttable.addToLightTable(fid);
+        Drupal.lighttable.repositionLast();
       }
     });
     $('.view-id-project_images .view-content .views-row').draggable({
+      cursorAt: { left: 0, top: 0 },
       revert: true,
       revertDuration: 0,
       helper: function(event) {
@@ -116,9 +118,18 @@
     });
 
     $('#lighttable').droppable({
+      accept: '.view-id-project_images .view-content .views-row',
+      hoverClass: "ui-state-hover",
+      tolerance: "pointer",
       drop: function(event, ui) {
-      console.log(ui.draggable.context);
-      $(ui.draggable.context).click();
+        var droppable_offset = $(this).offset();
+        var fid = $(ui.draggable.context).find('.lighttable-image-container').attr('fid');
+
+        // Only add to light table if it hasn't already been added
+        if (_self.currentImages.indexOf(fid) == -1) {
+          Drupal.lighttable.addToLightTable(fid, { left: ui.offset.left - droppable_offset.left - 5, top: ui.offset.top - droppable_offset.top - 5 });
+          Drupal.lighttable.containLast();
+        }
       }
     });
 
@@ -155,9 +166,9 @@
     }
   }
 
-  Drupal.lighttable.addToLightTable = function(fid) {
+  Drupal.lighttable.addToLightTable = function(fid, position) {
     // Need to add this to the current images array
-    var full_img, thumb_img;
+    var full_img, thumb_img, position = position || { left: 0, top: 0 };
 
     if (_self.currentImages[fid] == null) {
       if (_self.recentImages[fid] != null) {
@@ -192,6 +203,7 @@
       }
     }).resizable({
       aspectRatio: 'true',
+      containment: '#lighttable',
       handles: 'all',
       create: function(event, ui) {
         var uiResizable = $(this).data('resizable');
@@ -208,10 +220,17 @@
             }
           }
         }
+      },
+      resize: function(event, ui) {
+        var $img = $(this).find('img');
+        var aspectRatio = $img.attr('width') / $img.attr('height');
+        var img_height = $(this).height() - $('.field-title', this).outerHeight() - $('.lighttable-links', this).outerHeight();
+        var img_width = img_height * aspectRatio;
+        $(this).find('img').width(img_width);
       }
     });
 
-    $(img).attr('style', 'position: absolute; left: 0px; top: 0px; z-index: 3');
+    $(img).css({ position: "absolute", left: Math.round(position.left), top: Math.round(position.top), zIndex: 3 });
 
     // Add click handler for remove link
     $(img).find('.remove-link').click(function() {
@@ -381,6 +400,54 @@
     }
   }
 
+  Drupal.lighttable.repositionLast = function() {
+    var lighttable_right = $('#lighttable').width();
+    var lighttable_bottom = $('#lighttable').height();
+    var $new_item = $('#lighttable .lighttable-image-container:last-of-type');
+    var new_left = 0;
+    var new_right = new_left + $new_item.width();
+
+    $('#lighttable .lighttable-image-container:not(:last-of-type)').each(function(i) {
+      var existing_left = $(this).position().left;
+      var existing_right = existing_left + $(this).outerWidth();
+      if (
+           (new_left >= existing_left && new_left <= existing_right)
+        || (new_right >= existing_left && new_right <= existing_right)
+        || (existing_left >= new_left && existing_left <= new_right)
+        || (existing_right >= new_left && existing_right <= new_right)
+        ) {
+        new_left = existing_right + 5;
+        new_right = new_left + $new_item.outerWidth();
+        if (new_right > lighttable_right) {
+          // everything falls apart
+          var overflow_count = $('#lighttable .lighttable-image-container').length - i - 1;
+          new_left = 50 * overflow_count;
+          if (new_left + $new_item.outerWidth() > lighttable_right) {
+            new_left = lighttable_right - $new_item.outerWidth();
+          }
+          $new_item.css('top', 30);
+          return false;
+        }
+      }
+    });
+
+    $new_item.css('left', new_left);
+    Drupal.lighttable.containLast();
+  }
+
+  Drupal.lighttable.containLast = function() {
+    var $item = $('#lighttable .lighttable-image-container:last-of-type');
+    var $img = $item.find('img');
+    var max_left = $('#lighttable').width() - $item.outerWidth() - parseInt($img.attr('width')) + $img.width();
+    var max_top = $('#lighttable').height() - $item.outerHeight() - parseInt($img.attr('height')) + $img.height();
+    if ($item.position().left > max_left) {
+      $item.css('left', max_left);
+    }
+    if ($item.position().top > max_top) {
+      $item.css('top', max_top);
+    }
+  }
+
   Drupal.lighttable.enableComparison = function() {
     _self.comparisonEnabled = true;
 
@@ -389,15 +456,30 @@
     $('#make-comparison').css('cursor', 'pointer');
 
     $('#make-comparison').click(function() {
-      var fids_string = JSON.stringify(Drupal.lighttable.getCurrentIds());
+      var items = [];
       var href = location.pathname.replace(Drupal.settings.basePath, "");
-      var gid = href.match(/\d+/);
+      var gid = href.match(/project\/(\d+)/)[1];
 
-      $.post(basepath + "lighttable/comparison/" + gid, {'fids': fids_string}, function(nid) {
-        if (Drupal.cropzoom.isNumber(nid)) {
-          window.location = basepath + 'node/' + nid + '/edit';
-        }
+      $('#lighttable .lighttable-image-container').each(function() {
+        items.push({
+          fid: $(this).attr('fid'),
+          top: $(this).position().top,
+          left: $(this).position().left,
+          width: $(this).outerWidth(),
+          height: $(this).outerHeight()
+        });
+
       });
+
+      $.post(
+        basepath + "lighttable/comparison/" + gid,
+        $.param({ 'items': items }),
+        function(nid) {
+          if (Drupal.cropzoom.isNumber(nid)) {
+            window.location = basepath + 'node/' + nid + '/edit';
+          }
+        }
+      );
 
     });
   }
@@ -476,7 +558,7 @@
 
   Drupal.lighttable.reloadDisplay = function(newfid) {
     if (Drupal.cropzoom.isNumber(newfid)) {
-      var gid = location.href.match(/\d+/);
+      var gid = location.href.match(/project\/(\d+)\/lighttable/)[1];
 
       $.post(basepath + "lighttable/available-images/" + gid, {}, function(ret) {
         var displays = jQuery.parseJSON(ret);

@@ -27,17 +27,23 @@
   $fid = $fields['fid']->raw;
   $czid = 'cropzoom-f-' . $fid;
   $nid = $fields['nid']->raw;
-  
+
   // Get dimensions of full-sized image
   $full_dimensions = explode('|', strip_tags($fields['field_image_2']->content));
 ?>
 <div class="lighttable-image-container lighttable-image-container-<?php print $fid; ?>" fid="<?php print $fid; ?>" nid="<?php print $nid; ?>" full-width="<?php print $full_dimensions[0]; ?>" full-height="<?php print $full_dimensions[1]; ?>">
-  <div class="lighttable-full-image lighttable-full-image-<?php print $fid; ?>" class="borderbottom"><?php print $fields['field_image_1']->content; ?></div>
-  <div class="lighttable-links lighttable-links-<?php print $czid; ?>">
+  <div class="lighttable-full-image lighttable-full-image-<?php print $fid; ?>" class="borderbottom">
+    <span class="field-title"><?php print $fields['title']->content ?></span>
+    <?php print $fields['field_image_1']->content; ?>
+  </div>
+  <div class="clearfix lighttable-links lighttable-links-<?php print $czid; ?>">
     <div class="crop-link-modal" fid="<?php print $fid; ?>" nid="<?php print $nid; ?>">CROP</div>
     <div class="remove-link">REMOVE</div>
   </div>
 </div>
 <div class="lighttable-thumb-container lighttable-thumb-container-<?php print $fid; ?>" fid="<?php print $fid; ?>">
-  <div class="lighttable-thumb lighttable-thumb-<?php print $fid; ?>"><?php print $fields['field_image']->content; ?></div>
+  <div class="lighttable-thumb lighttable-thumb-<?php print $fid; ?>">
+    <?php print $fields['field_image']->content; ?>
+    <span class="field-title"><?php print $fields['title']->content ?></span>
+  </div>
 </div>

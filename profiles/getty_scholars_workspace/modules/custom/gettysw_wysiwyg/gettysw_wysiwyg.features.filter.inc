@@ -55,13 +55,6 @@ function gettysw_wysiwyg_filter_default_formats() {
     'status' => 1,
     'weight' => 1,
     'filters' => array(
-      'filter_footnotes' => array(
-        'weight' => -20,
-        'status' => 1,
-        'settings' => array(
-          'footnotes_collapse' => 0,
-        ),
-      ),
       'filter_url' => array(
         'weight' => 0,
         'status' => 1,

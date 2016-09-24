@@ -1,0 +1,166 @@
+@keyframes spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#upload-images-page {
+  color: #646f81;
+}
+
+#upload-images-page * {
+  box-sizing: border-box;
+}
+
+#upload-images-page .messages:empty {
+  display: none;
+}
+
+#upload-images-page-splash {
+  border: 2px solid #646f81;
+  font-size: 21px;
+  padding: 40px;
+  text-align: center;
+}
+.has-images #upload-images-page-splash {
+  display: none;
+}
+#upload-images-page-splash h3 {
+  font-weight: normal;
+}
+#upload-images-page-splash a {
+  background: #646f81;
+  border: 1px solid #ccc;
+  color: white;
+  display: inline-block;
+  font: bold 15px/1 "Source Sans Pro",sans-serif;
+  padding: 10px 30px;
+  text-decoration: none;
+}
+
+#upload-images-page-edit {
+  display: none;
+}
+.has-images #upload-images-page-edit {
+  display: block;
+}
+#upload-images-page-edit .toolbar {
+  background: #eee;
+  border: 2px solid #646f81;
+  padding: 5px 10px;
+  overflow: hidden;
+}
+#upload-images-page-edit .toolbar > div {
+  float: left;
+  margin: 0 36px;
+}
+#upload-images-page-edit .toolbar > div:first-of-type {
+  margin-left: 0;
+}
+#upload-images-page-edit .toolbar a {
+  color: #646f81;
+  display: block;
+  float: left;
+  padding: 10px;
+}
+#upload-images-page-edit .toolbar #upload-images-page-submit,
+#upload-images-page-edit .toolbar #upload-images-page-cancel {
+  background: #646f81;
+  border: 1px solid #ccc;
+  color: white;
+  font: bold 12px/1 "Source Sans Pro",sans-serif;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-decoration: none;
+}
+#upload-images-page-edit .toolbar #upload-images-page-submit.disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+#upload-images-page-edit .toolbar #upload-images-page-submit.loading:after {
+  animation: spinner 1s linear infinite;
+  border-color: white white white transparent;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0.25em;
+  content: " ";
+  display: inline-block;
+  height: 1em;
+  margin-left: 1em;
+  margin-right: -0.5em;
+  vertical-align: middle;
+  width: 1em;
+}
+#upload-images-page-edit .toolbar #upload-images-page-add {
+  border-right: 1px solid #646f81;
+}
+#upload-images-page-edit .toolbar #upload-images-page-add:before {
+  color: limegreen;
+  content: "+ ";
+  font-weight: bold;
+}
+#upload-images-page-edit .toolbar #upload-images-page-remove {}
+#upload-images-page-edit .toolbar #upload-images-page-remove:before {
+  color: red;
+  content: "x ";
+  font-weight: bold;
+}
+#upload-images-page-edit .toolbar #upload-images-page-select-all {
+  border-right: 1px solid #646f81;
+}
+#upload-images-page-edit .toolbar #upload-images-page-deselect-all {}
+#upload-images-page-edit .toolbar #upload-images-page-submit {
+  float: right;
+}
+#upload-images-page-edit .content-container {
+  float: left;
+  padding: 10px;
+  width: 70%;
+}
+#upload-images-page-edit .content-container .item {
+  float: left;
+  padding: 15px;
+  width: 20%;
+}
+#upload-images-page-edit .content-container .item.selected .thumbnail {
+  box-shadow: 0 0 0 6px #4286bf;
+  outline: 1px solid white;
+}
+#upload-images-page-edit .content-container .thumbnail {
+  background: #ccc center center / cover;
+  height: 0;
+  margin-bottom: 1em;
+  padding-top: 100%;
+  position: relative;
+  width: 100%;
+}
+#upload-images-page-edit .content-container .uploaded .thumbnail::after {
+  background: white none repeat scroll 0 0;
+  border-radius: 0.25em;
+  color: green;
+  content: "✓";
+  font-size: 1.1em;
+  font-weight: bold;
+  left: 0.25em;
+  opacity: 0.9;
+  padding: 0.1em 0.5em;
+  position: absolute;
+  top: 0.25em;
+}
+#upload-images-page-edit .content-container input {
+  display: block;
+  width: 100%;
+}
+#upload-images-page-edit .form-container {
+  float: right;
+  padding: 10px;
+  width: 30%;
+}
+#upload-images-page-edit .form-container input {
+  width: 100%;
+}
+.has-selection #upload-images-page-edit .form-container .default-message {
+  display: none;
+}
+.has-selection #upload-images-page-edit .form-container #upload-images-page-form {
+  display: block !important;
+}

@@ -59,7 +59,9 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:approve comment_node_bibliography'
   $permissions['node:project:approve comment_node_bibliography'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+    ),
   );
 
   // Exported og permission: 'node:project:approve comment_node_comparison'
@@ -80,7 +82,6 @@ function gettysw_user_permissions_og_features_default_permissions() {
   $permissions['node:project:approve comment_node_forum'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'research assistant' => 'research assistant',
     ),
   );
 
@@ -100,7 +101,9 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:approve comment_node_page'
   $permissions['node:project:approve comment_node_page'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+    ),
   );
 
   // Exported og permission: 'node:project:approve comment_node_project'
@@ -124,7 +127,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:create bibliography content'
   $permissions['node:project:create bibliography content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:create comparison content'
@@ -174,17 +181,28 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:create page content'
   $permissions['node:project:create page content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:create timeline_date content'
   $permissions['node:project:create timeline_date content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:delete any bibliography content'
   $permissions['node:project:delete any bibliography content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete any comparison content'
@@ -213,7 +231,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete any image annotations'
   $permissions['node:project:delete any image annotations'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete any image content'
@@ -234,7 +255,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete any page content'
   $permissions['node:project:delete any page content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete any text annotations'
@@ -247,12 +271,18 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete any timeline_date content'
   $permissions['node:project:delete any timeline_date content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete comment_node_bibliography'
   $permissions['node:project:delete comment_node_bibliography'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete comment_node_comparison'
@@ -297,7 +327,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete comment_node_page'
   $permissions['node:project:delete comment_node_page'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:delete comment_node_project'
@@ -312,7 +345,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete own bibliography content'
   $permissions['node:project:delete own bibliography content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:delete own comparison content'
@@ -344,7 +381,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete own image annotations'
   $permissions['node:project:delete own image annotations'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:delete own image content'
@@ -367,7 +408,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete own page content'
   $permissions['node:project:delete own page content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:delete own text annotations'
@@ -381,12 +426,19 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:delete own timeline_date content'
   $permissions['node:project:delete own timeline_date content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:edit comment_node_bibliography'
   $permissions['node:project:edit comment_node_bibliography'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:edit comment_node_comparison'
@@ -431,7 +483,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:edit comment_node_page'
   $permissions['node:project:edit comment_node_page'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:edit comment_node_project'
@@ -462,14 +517,16 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:edit own comment_node_bibliography'
   $permissions['node:project:edit own comment_node_bibliography'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:edit own comment_node_comparison'
   $permissions['node:project:edit own comment_node_comparison'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'member' => 'member',
       'research assistant' => 'research assistant',
     ),
   );
@@ -478,7 +535,6 @@ function gettysw_user_permissions_og_features_default_permissions() {
   $permissions['node:project:edit own comment_node_essay'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'member' => 'member',
       'research assistant' => 'research assistant',
     ),
   );
@@ -487,7 +543,6 @@ function gettysw_user_permissions_og_features_default_permissions() {
   $permissions['node:project:edit own comment_node_forum'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'member' => 'member',
       'research assistant' => 'research assistant',
     ),
   );
@@ -496,7 +551,6 @@ function gettysw_user_permissions_og_features_default_permissions() {
   $permissions['node:project:edit own comment_node_image'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'member' => 'member',
       'research assistant' => 'research assistant',
     ),
   );
@@ -505,14 +559,16 @@ function gettysw_user_permissions_og_features_default_permissions() {
   $permissions['node:project:edit own comment_node_manuscript'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
-      'member' => 'member',
       'research assistant' => 'research assistant',
     ),
   );
 
   // Exported og permission: 'node:project:edit own comment_node_page'
   $permissions['node:project:edit own comment_node_page'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:edit own comment_node_project'
@@ -546,7 +602,12 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:post comment_node_bibliography'
   $permissions['node:project:post comment_node_bibliography'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'member' => 'member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:post comment_node_comparison'
@@ -601,7 +662,12 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:post comment_node_page'
   $permissions['node:project:post comment_node_page'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'member' => 'member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:post comment_node_project'
@@ -628,12 +694,17 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:unsubscribe'
   $permissions['node:project:unsubscribe'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'member' => 'member',
+    ),
   );
 
   // Exported og permission: 'node:project:update any bibliography content'
   $permissions['node:project:update any bibliography content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:update any comparison content'
@@ -662,7 +733,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update any image annotations'
   $permissions['node:project:update any image annotations'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:update any image content'
@@ -683,7 +757,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update any page content'
   $permissions['node:project:update any page content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:update any text annotations'
@@ -696,7 +773,10 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update any timeline_date content'
   $permissions['node:project:update any timeline_date content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+    ),
   );
 
   // Exported og permission: 'node:project:update group'
@@ -708,7 +788,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update own bibliography content'
   $permissions['node:project:update own bibliography content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:update own comparison content'
@@ -740,7 +824,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update own image annotations'
   $permissions['node:project:update own image annotations'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:update own image content'
@@ -763,7 +851,11 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update own page content'
   $permissions['node:project:update own page content'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:update own text annotations'
@@ -777,11 +869,6 @@ function gettysw_user_permissions_og_features_default_permissions() {
 
   // Exported og permission: 'node:project:update own timeline_date content'
   $permissions['node:project:update own timeline_date content'] = array(
-    'roles' => array(),
-  );
-
-  // Exported og permission: 'node:project:view group forum list'
-  $permissions['node:project:view group forum list'] = array(
     'roles' => array(
       'group administrator member' => 'group administrator member',
       'research assistant' => 'research assistant',
@@ -789,9 +876,24 @@ function gettysw_user_permissions_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:project:view group forum list'
+  $permissions['node:project:view group forum list'] = array(
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'member' => 'member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
+  );
+
   // Exported og permission: 'node:project:view image annotations'
   $permissions['node:project:view image annotations'] = array(
-    'roles' => array(),
+    'roles' => array(
+      'group administrator member' => 'group administrator member',
+      'member' => 'member',
+      'research assistant' => 'research assistant',
+      'scholar' => 'scholar',
+    ),
   );
 
   // Exported og permission: 'node:project:view text annotations'

@@ -10,7 +10,7 @@
 function essay_node_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-essay-body'
+  // Exported field_instance: 'node-essay-body'.
   $field_instances['node-essay-body'] = array(
     'bundle' => 'essay',
     'default_value' => NULL,
@@ -39,10 +39,10 @@ function essay_node_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
+    'label' => 'Essay Text',
     'required' => 0,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => 0,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -58,7 +58,7 @@ function essay_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-essay-field_summary'
+  // Exported field_instance: 'node-essay-field_summary'.
   $field_instances['node-essay-field_summary'] = array(
     'bundle' => 'essay',
     'default_value' => NULL,
@@ -100,7 +100,7 @@ function essay_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-essay-field_tags'
+  // Exported field_instance: 'node-essay-field_tags'.
   $field_instances['node-essay-field_tags'] = array(
     'bundle' => 'essay',
     'default_value' => NULL,
@@ -139,7 +139,7 @@ function essay_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-essay-og_group_ref'
+  // Exported field_instance: 'node-essay-og_group_ref'.
   $field_instances['node-essay-og_group_ref'] = array(
     'bundle' => 'essay',
     'default_value' => NULL,
@@ -200,7 +200,7 @@ function essay_node_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
+  t('Essay Text');
   t('Groups audience');
   t('Summary');
   t('Tags');

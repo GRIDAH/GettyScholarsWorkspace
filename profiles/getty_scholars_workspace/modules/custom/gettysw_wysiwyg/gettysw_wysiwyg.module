@@ -3,3 +3,40 @@
  * @file
  * Drupal needs this blank file.
  */
+
+function gettysw_wysiwyg_wysiwyg_plugin($editor, $version) {
+  $path = wysiwyg_get_path('ckeditor');
+
+  switch ($editor) {
+    case 'ckeditor':
+        return array(
+          'footnotes' => array(
+            'path' => $path . '/plugins/footnotes/footnotes',
+            'buttons' => array('Footnotes' => t('Footnotes')),
+            'url' => 'http://ckeditor.com/addon/footnotes',
+            'load' => TRUE,
+          ),
+          'indent_block' => array(
+            'buttons' => array('IndentBlock' => t('Indent Block')),
+            'internal' => TRUE,
+          ),
+          'indent_list' => array(
+            'buttons' => array('IndentList' => t('Indent List')),
+            'internal' => TRUE,
+          ),
+          'lineutils' => array(
+            'path' => $path . '/plugins/lineutils',
+            'buttons' => array('LineUtils' => t('Line Utils (Required by Footnotes)')),
+            'url' => 'http://ckeditor.com/addon/lineutils',
+            'load' => TRUE,
+          ),
+          'widget' => array(
+            'path' => $path . '/plugins/widget',
+            'buttons' => array('Widget' => t('Widget (Required by Footnotes)')),
+            'url' => 'http://ckeditor.com/addon/widget',
+            'load' => TRUE,
+          ),
+        );
+      break;
+  }
+}

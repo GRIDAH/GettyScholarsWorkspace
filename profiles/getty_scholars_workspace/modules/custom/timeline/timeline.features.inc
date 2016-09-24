@@ -19,3 +19,21 @@ function timeline_ctools_plugin_api($module = NULL, $api = NULL) {
 function timeline_views_api($module = NULL, $api = NULL) {
   return array("api" => "3.0");
 }
+
+/**
+ * Implements hook_node_info().
+ */
+function timeline_node_info() {
+  $items = array(
+    'timeline_date' => array(
+      'name' => t('Timeline Date'),
+      'base' => 'node_content',
+      'description' => t('A <em>timeline date</em> is an event on a timeline. This content type is optimized for use with Timeline JS.'),
+      'has_title' => '1',
+      'title_label' => t('Headline'),
+      'help' => '',
+    ),
+  );
+  drupal_alter('node_info', $items);
+  return $items;
+}

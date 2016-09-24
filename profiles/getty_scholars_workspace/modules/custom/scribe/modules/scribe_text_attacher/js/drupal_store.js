@@ -181,10 +181,10 @@
             return function(attach_data) {
               annotation_data.field_parent_ref = attach_data;
               return _this._apiRequest('create', annotation_data, function(data) {
-                _this.updateAnnotation(annotation, data);
                 if (data.id == null) {
                   return console.warn(Annotator._t("Warning: No ID returned from server for annotation "), annotation);
                 }
+                _this.updateAnnotation(annotation, data);
               });
             };
           })(this));

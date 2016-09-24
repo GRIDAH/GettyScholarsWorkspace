@@ -11,10 +11,23 @@ include_once 'timeline.features.inc';
  */
 function timeline_views_pre_view(&$view) {
   if ($view->name == 'project_timeline' && $view->current_display == 'page') {
-    if (node_access('create', 'timeline_date')) {
-      $project_nid = arg(1);
+    $project_nid = arg(1);
+    if (og_user_access('node', $project_nid, 'create timeline_date content')) {
       $view->attachment_before = l(t('Add new date'), "node/add/timeline-date/$project_nid");
     }
   }
 }
 
+/**
+ * Implements hook_init().
+ */
+function timeline_init() {
+  if (arg(0) == 'node' && is_numeric(arg(1)) && (arg(2) == NULL || arg(2) == 'view')) {
+    // Users with edit access can view this node detail page. All others are redirected to the timeline.
+    $node = menu_get_object();
+    if (!empty($node) && ($node->type == 'timeline_date') && !node_access('update', $node)) {
+      $gid = $node->og_group_ref['und'][0]['target_id'];
+      drupal_goto("project/$gid/timeline");
+    }
+  }
+}

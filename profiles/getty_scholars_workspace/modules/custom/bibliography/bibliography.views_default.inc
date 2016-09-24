@@ -25,10 +25,13 @@ function bibliography_views_default_views() {
   $handler->display->display_options['title'] = 'Bibliography';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['link_display'] = 'page_1';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'reset filters';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -102,18 +105,18 @@ function bibliography_views_default_views() {
   $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
   $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
-  /* Field: Content: Author First Name */
-  $handler->display->display_options['fields']['field_author_first_name']['id'] = 'field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['table'] = 'field_data_field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['field'] = 'field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['settings'] = array(
-    'field_formatter_class' => '',
-  );
   /* Field: Content: Author Last Name */
   $handler->display->display_options['fields']['field_author_last_name']['id'] = 'field_author_last_name';
   $handler->display->display_options['fields']['field_author_last_name']['table'] = 'field_data_field_author_last_name';
   $handler->display->display_options['fields']['field_author_last_name']['field'] = 'field_author_last_name';
   $handler->display->display_options['fields']['field_author_last_name']['settings'] = array(
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Author First Name */
+  $handler->display->display_options['fields']['field_author_first_name']['id'] = 'field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['table'] = 'field_data_field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['field'] = 'field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['settings'] = array(
     'field_formatter_class' => '',
   );
   /* Field: Content: Title */
@@ -219,6 +222,12 @@ function bibliography_views_default_views() {
 
   /* Display: Bibliography List Block */
   $handler = $view->new_display('block', 'Bibliography List Block', 'block_bibliography_list');
+  $handler->display->display_options['link_url'] = 'project/%1/bibliography';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['enabled'] = FALSE;
+  $handler->display->display_options['path'] = 'project/%/bibliography';
   $export['bibliography'] = $view;
 
   $view = new view();
@@ -312,17 +321,6 @@ function bibliography_views_default_views() {
   $handler->display->display_options['relationships']['og_membership_rel']['id'] = 'og_membership_rel';
   $handler->display->display_options['relationships']['og_membership_rel']['table'] = 'node';
   $handler->display->display_options['relationships']['og_membership_rel']['field'] = 'og_membership_rel';
-  /* Field: Content: Author First Name */
-  $handler->display->display_options['fields']['field_author_first_name']['id'] = 'field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['table'] = 'field_data_field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['field'] = 'field_author_first_name';
-  $handler->display->display_options['fields']['field_author_first_name']['label'] = 'hidden';
-  $handler->display->display_options['fields']['field_author_first_name']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_author_first_name']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_author_first_name']['alter']['text'] = '[field_author_first_name], ';
-  $handler->display->display_options['fields']['field_author_first_name']['settings'] = array(
-    'field_formatter_class' => '',
-  );
   /* Field: Content: Author Last Name */
   $handler->display->display_options['fields']['field_author_last_name']['id'] = 'field_author_last_name';
   $handler->display->display_options['fields']['field_author_last_name']['table'] = 'field_data_field_author_last_name';
@@ -330,8 +328,19 @@ function bibliography_views_default_views() {
   $handler->display->display_options['fields']['field_author_last_name']['label'] = 'hidden';
   $handler->display->display_options['fields']['field_author_last_name']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_author_last_name']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_author_last_name']['alter']['text'] = '[field_author_first_name][field_author_last_name]. ';
+  $handler->display->display_options['fields']['field_author_last_name']['alter']['text'] = '[field_author_last_name], ';
   $handler->display->display_options['fields']['field_author_last_name']['settings'] = array(
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Author First Name */
+  $handler->display->display_options['fields']['field_author_first_name']['id'] = 'field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['table'] = 'field_data_field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['field'] = 'field_author_first_name';
+  $handler->display->display_options['fields']['field_author_first_name']['label'] = 'hidden';
+  $handler->display->display_options['fields']['field_author_first_name']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_author_first_name']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_author_first_name']['alter']['text'] = '[field_author_last_name][field_author_first_name]. ';
+  $handler->display->display_options['fields']['field_author_first_name']['settings'] = array(
     'field_formatter_class' => '',
   );
   /* Field: Content: Title */
@@ -381,7 +390,7 @@ function bibliography_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_author_last_name][title][field_biblio_publisher]';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_author_first_name][title][field_biblio_publisher]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';

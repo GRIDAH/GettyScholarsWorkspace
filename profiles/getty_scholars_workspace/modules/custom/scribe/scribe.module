@@ -163,7 +163,8 @@ function scribe_preprocess_field(&$variables, $hook) {
       $attacher->entity_id = $entity_id;
       $attacher->annotation_type = $name;
       $attacher->object = $element['#object'];
-      $access_create = scribe_attachment_access('create', $attacher, NULL, $element['#entity_type']);
+      $gid = $element['#object']->og_group_ref[LANGUAGE_NONE][0]['target_id'];
+      $access_create = scribe_attachment_access('create', $attacher, NULL, $element['#entity_type']) && og_user_access('node', $gid, 'create annotation');
 
       // Add data attributes onto the field, this will be used for
       // saving an annotation
@@ -665,7 +666,7 @@ function scribe_scribe_attachment_delete($attachment) {
   $entity_info = $attachment->entityInfo();
   $metadataTable = $entity_info['bundles'][$attachment->bundle()]['metadata table'];
   db_delete($metadataTable)
-    ->condition('attachment_id', $attachment->identifier)
+    ->condition('attachment_id', $attachment->identifier())
     ->execute();
 
   // Delete the annotation related to attachment

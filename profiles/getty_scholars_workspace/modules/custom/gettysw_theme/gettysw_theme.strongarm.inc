@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * sw_theme.strongarm.inc
+ * gettysw_theme.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function sw_theme_strongarm() {
+function gettysw_theme_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
@@ -21,7 +21,7 @@ function sw_theme_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'node_admin_theme';
-  $strongarm->value = 1;
+  $strongarm->value = '1';
   $export['node_admin_theme'] = $strongarm;
 
   $strongarm = new stdClass();

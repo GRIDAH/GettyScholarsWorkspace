@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Implementation of hook_init().
+ */
 function gettysw_general_init() {
   drupal_add_js(drupal_get_path('module', 'gettysw_general') . '/gettysw_general.js');
   drupal_add_js(drupal_get_path('module', 'gettysw_general') . '/jquery.webkitresize.js');
@@ -43,7 +46,7 @@ function gettysw_general_form_alter(&$form, &$form_state, $form_id) {
   if (isset($form['og_group_ref']['und'][0]['admin'])) {
     unset($form['og_group_ref']['und'][0]['admin']);
   }
-  
+
   //Updating buttons and links on user sign on screen.
   if ($form_id == 'user_login') {
     unset($form['name']['#description']);
@@ -70,6 +73,63 @@ function gettysw_general_form_alter(&$form, &$form_state, $form_id) {
   if (preg_match($comment_form_pattern, $form_id)) {
     $form['#submit'] = array('gettysw_general_comment_form_submit');
   }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function gettysw_general_form_node_form_alter(&$form, &$form_state) {
+  if (!empty($form['field_tags'])) {
+    // Only show terms associated with this group
+    if (empty($form_state['storage']['gid'])) {
+      // Store the gid on first form load, because ajax image uploads mess this up and then cache a bad state.
+      $form_state['storage']['gid'] = (!empty($form_state['node']->nid) ? $form_state['node']->og_group_ref[LANGUAGE_NONE][0]['target_id'] : arg(3));
+    }
+    $gid = $form_state['storage']['gid'];
+    $valid_tids = db_select('og_membership', 'ogm')
+      ->fields('ogm', array('etid'))
+      ->condition('entity_type', 'taxonomy_term')
+      ->condition('gid', $gid)
+      ->condition('state', 1)
+      ->execute()
+      ->fetchCol();
+    foreach ($form['field_tags'][LANGUAGE_NONE]['#options'] as $tid => $item) {
+      if (!in_array($tid, $valid_tids)) {
+        unset($form['field_tags'][LANGUAGE_NONE]['#options'][$tid]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function gettysw_general_form_views_exposed_form_alter(&$form, &$form_state) {
+  if ($form_state['view']->name == 'project_images' && $form_state['view']->current_display == 'available_images_block') {
+    if (!empty($form['tid'])) {
+      // Only show terms associated with this group
+      $gid = arg(1);
+      $valid_tids = db_select('og_membership', 'ogm')
+        ->fields('ogm', array('etid'))
+        ->condition('entity_type', 'taxonomy_term')
+        ->condition('gid', $gid)
+        ->condition('state', 1)
+        ->execute()
+        ->fetchCol();
+      foreach ($form['tid']['#options'] as $tid => $item) {
+        if (!in_array($tid, $valid_tids)) {
+          unset($form['tid']['#options'][$tid]);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function gettysw_general_url_outbound_alter(&$path, &$options, $original_path) {
+  $options['absolute'] = TRUE;
 }
 
 /**

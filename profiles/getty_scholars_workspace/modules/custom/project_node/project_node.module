@@ -5,3 +5,19 @@
  */
 
 include_once 'project_node.features.inc';
+
+/**
+ * Implements hook_form_alter().
+ */
+function project_node_form_project_node_form_alter(&$form, &$form_state) {
+  if (!empty($form['group_access'])) {
+    $form['group_access'][LANGUAGE_NONE]['#default_value'] = 1;
+    $form['group_access'][LANGUAGE_NONE]['#access'] = FALSE;
+  }
+  $form['actions']['submit']['#submit'][] = '_gettysw_project_redirect';
+}
+
+function _gettysw_project_redirect($form, &$form_state) {
+  unset($_GET['destination']);
+  $form_state['redirect'] = 'project/' . $form_state['node']->nid;
+}

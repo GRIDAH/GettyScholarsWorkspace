@@ -31,8 +31,31 @@ function gettysw_preprocess_field(&$vars, $hook) {
       if (module_exists('image_field_caption') && isset($item['image_field_caption'])) {
         $vars['items'][$delta]['caption'] = check_markup($item['image_field_caption']['value'], $item['image_field_caption']['format']);
       }
-      if ($vars['element']['#field_name'] == 'field_image' && isset($item['uri']) && module_exists('colorbox')) {
-        $vars['items'][$delta]['colorbox_link'] = '<a class="colorbox" href="' . file_create_url($item['uri']) . '">View full-size image</a>';
+      if ($vars['element']['#field_name'] == 'field_image' && isset($item['uri']) && module_exists('colorbox') && empty($vars['element']['#object']->is_export)) {
+        $vars['items'][$delta]['colorbox_link'] = '<a class="colorbox" href="' . file_create_url($item['uri']) . '">Expand Image</a>';
+      }
+      if ($vars['element']['#field_name'] == 'field_image_reference_info' && $vars['element']['#view_mode'] == 'full') {
+        drupal_add_css(drupal_get_path('module', 'lighttable') . '/lighttable.css');
+        $vars['content_attributes_array'] = array('id' => 'lighttable');
+        foreach ($vars['items'] as $delta => $item) {
+          $fc_item = reset($vars['items'][$delta]['entity']['field_collection_item']);
+
+          $image_entity = $fc_item['#entity']->field_image_reference[LANGUAGE_NONE][0]['entity'];
+          $file_nodes = file_usage_list($image_entity);
+          $image_node = node_load(key($file_nodes['file']['node']));
+          $vars['items'][$delta]['entity']['field_collection_item']['title'] = array(
+            '#markup' => '<span class="field-title">' . $image_node->title . '</span>',
+            '#weight' => -1,
+          );
+
+          $left = $fc_item['#entity']->field_x_pos[LANGUAGE_NONE][0]['value'];
+          $top = $fc_item['#entity']->field_y_pos[LANGUAGE_NONE][0]['value'];
+          $width = $fc_item['#entity']->field_width[LANGUAGE_NONE][0]['value'];
+          $height = $fc_item['#entity']->field_height[LANGUAGE_NONE][0]['value'];
+
+          $vars['items'][$delta]['#attributes']['style'] = "position: absolute; top: {$top}px; left: {$left}px; width: {$width}px; height: {$height}px;";
+          $vars['items'][$delta]['#attributes']['class'][] = 'lighttable-image-container';
+        }
       }
     }
   }

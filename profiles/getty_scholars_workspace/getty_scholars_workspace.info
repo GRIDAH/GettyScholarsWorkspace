@@ -43,6 +43,7 @@ dependencies[] = user
 ; Date/Time
 dependencies[] = date
 dependencies[] = date_api
+dependencies[] = partial_date
 ; Development
 dependencies[] = profiler_builder
 ; Feeds
@@ -61,7 +62,6 @@ dependencies[] = flexslider
 dependencies[] = bibliography
 dependencies[] = bibliography_plugin
 dependencies[] = bibliography_support
-dependencies[] = comparison_display
 dependencies[] = comparison_node
 dependencies[] = comparison_plugin
 dependencies[] = cropzoom
@@ -88,10 +88,12 @@ dependencies[] = scribe_og
 dependencies[] = scribe_tagger
 dependencies[] = scribe_text_attacher
 dependencies[] = shared_field_bases
-dependencies[] = sw_theme
+dependencies[] = gettysw_theme
 dependencies[] = timeline
 ; Media
 dependencies[] = file_entity
+dependencies[] = imagecache_actions
+dependencies[] = imagecache_canvasactions
 ; Organic groups
 dependencies[] = comment_og
 dependencies[] = og
@@ -105,7 +107,6 @@ dependencies[] = colorbox
 dependencies[] = diff
 dependencies[] = entity
 dependencies[] = field_formatter_settings
-dependencies[] = footnotes
 dependencies[] = image_field_caption
 dependencies[] = job_scheduler
 dependencies[] = libraries
@@ -116,7 +117,6 @@ dependencies[] = strongarm
 ; Search Toolkit
 dependencies[] = facetapi
 ; User interface
-dependencies[] = footnotes_wysiwyg
 dependencies[] = jquery_update
 dependencies[] = popup
 dependencies[] = popup_ui
@@ -130,5 +130,4 @@ dependencies[] = views_timelinejs
 dependencies[] = views_ui
 ; Features
 dependencies[] = features
-dependencies[] = views_timelinejs_feature
 

@@ -23,16 +23,16 @@ function lighttable_menu() {
     'title arguments' => array(1),
     'page callback' => 'lighttable_display',
     'page arguments' => array(1),
-    'access callback' => 'og_is_member',
-    'access arguments' => array('node', 1),
+    'access callback' => 'og_user_access',
+    'access arguments' => array('node', 1, 'create comparison content'),
   );
 
   $items['lighttable/comparison/%'] = array(
     'title' => 'Make Comparison',
     'page callback' => 'lighttable_create_comparison',
     'page arguments' => array(2),
-    'access callback' => 'og_is_member',
-    'access arguments' => array('node', 2),
+    'access callback' => 'og_user_access',
+    'access arguments' => array('node', 2, 'create comparison content'),
   );
 
   $items['lighttable/available-images/%'] = array(
@@ -64,37 +64,62 @@ function lighttable_display($gid) {
   $lt_main = '<div id="lighttable"></div>';
   $output .= $lt_main;
 
+  // Exposed filters
+  $view = views_get_view('project_images');
+  $available_images_block = $view->preview('available_images_block', array($gid));
+
+  $exposed_plugin = $view->display_handler->get_plugin('exposed_form');
+  $exposed_form = $exposed_plugin->render_exposed_form();
+
   // Add view with available images for this project
-  $available_images_grid = views_embed_view('project_images', 'available_images_block', $gid);
-  $available_images_list = views_embed_view('project_images', 'available_images_list_block', $gid);
-  $available_images = '<div id="lt-available-images">' . $available_images_grid . $available_images_list . '</div>';
+  $available_images_grid = $available_images_block;
+  // $available_images_list = views_embed_view('project_images', 'available_images_list_block', $gid);
+  $available_images = '
+    <div id="lt-available-images" class="show-hide-container clearfix open">
+      <div class="clearfix">
+        <h3><a class="show-hide-trigger" href="#">' . t('Project Images') . '</a></h3>
+        <a class="show-hide-trigger help-text" href="#">
+          <span class="open-hide">' . t('Show') . '</span>
+          <span class="closed-hide">' . t('Hide') . '</span>
+        </a>
+      </div>
+      <div class="show-hide-content">
+        ' . $exposed_form . '
+        ' . $available_images_grid . '
+      </div>
+    </div>
+  ';
   $output .= $available_images;
 
   return $output;
 }
 
 function lighttable_create_comparison($gid) {
-  $fids = $_POST['fids'];
-  $fids = json_decode($fids);
-
   global $user;
   // Create new node
   $new_node = new stdClass();
+  $new_node->is_new = TRUE;
   $new_node->type = 'comparison';
-  $new_node->title = 'Comparison';
-  $new_node->uid = $user->uid;
   $new_node->language = LANGUAGE_NONE;
+  node_object_prepare($new_node);
 
-  if (module_exists('comment')) {
-    $new_node->comment = variable_get('comment_comparison', COMMENT_NODE_OPEN);
-  }
+  $new_node->title = 'Comparison';
 
   if (isset($gid) && og_is_member('node', $gid)) {
     $new_node->og_group_ref['und'][] = array('target_id' => $gid);
 
     // Add files to this
-    foreach ($fids as $fid) {
-      $new_node->field_image_references[LANGUAGE_NONE][] = array('target_id' => $fid);
+    foreach ($_POST['items'] as $delta => $item) {
+      $fc_item = entity_create('field_collection_item', array('field_name' => 'field_image_reference_info'));
+      $fc_item->field_image_reference[LANGUAGE_NONE][0] = array('target_id' => (int) $item['fid']);
+      $fc_item->field_x_pos[LANGUAGE_NONE][0] = array('value' => (float) $item['left']);
+      $fc_item->field_y_pos[LANGUAGE_NONE][0] = array('value' => (float) $item['top']);
+      $fc_item->field_width[LANGUAGE_NONE][0] = array('value' => (float) $item['width']);
+      $fc_item->field_height[LANGUAGE_NONE][0] = array('value' => (float) $item['height']);
+      $fc_item->setHostEntity('node', $new_node);
+      $fc_item->save();
+
+      $node->field_image_reference_info[LANGUAGE_NONE][$delta] = array('value' => $fc_item->item_id, 'revision_id' => $fc_item->revision_id);
     }
 
     node_save($new_node);
@@ -180,4 +205,18 @@ function lighttable_views_query_alter(&$view, &$query) {
     // Removes duplicate file images when multiple come from the same node
     $query->add_where_expression(0, 'file_managed_file_usage.fid = field_data_field_image.field_image_fid');
   }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function lighttable_preprocess_file_entity(&$vars) {
+  $vars['page'] = TRUE;
+}
+
+/**
+ * Implements hook_file_view_alter().
+ */
+function lighttable_file_view_alter(&$build) {
+  unset($build['#contextual_links']);
 }

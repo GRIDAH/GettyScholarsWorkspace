@@ -5,9 +5,9 @@
  */
 function essay_node_install() {
   // Attach scribe field
-    db_insert('scribe_attacher_field')
+	db_insert('scribe_attacher_field')
     ->fields(array(
-      'field_name' => 'field_image',
+      'field_name' => 'body',
       'entity_type' => 'node',
       'bundle' => 'essay',
     ))

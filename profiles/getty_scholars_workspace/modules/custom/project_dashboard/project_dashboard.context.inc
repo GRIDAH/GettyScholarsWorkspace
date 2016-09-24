@@ -64,6 +64,7 @@ function project_dashboard_context_default_contexts() {
         'image' => 'image',
         'manuscript' => 'manuscript',
         'page' => 'page',
+        'timeline_date' => 'timeline_date',
       ),
       'options' => array(
         'node_form' => '1',

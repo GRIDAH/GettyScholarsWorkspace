@@ -29,7 +29,7 @@ function bibliography_views_api($module = NULL, $api = NULL) {
 function bibliography_node_info() {
   $items = array(
     'bibliography' => array(
-      'name' => t('Bibliography'),
+      'name' => t('Citation'),
       'base' => 'node_content',
       'description' => '',
       'has_title' => '1',

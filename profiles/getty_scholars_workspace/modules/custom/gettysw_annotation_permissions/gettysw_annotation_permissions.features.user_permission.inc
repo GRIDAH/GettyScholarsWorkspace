@@ -63,7 +63,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'delete own image annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );
@@ -73,7 +72,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'delete own text annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );
@@ -101,7 +99,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'update own image annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );
@@ -111,7 +108,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'update own text annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );
@@ -121,7 +117,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'view image annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );
@@ -131,7 +126,6 @@ function gettysw_annotation_permissions_user_default_permissions() {
     'name' => 'view text annotations',
     'roles' => array(
       'administrator' => 'administrator',
-      'authenticated user' => 'authenticated user',
     ),
     'module' => 'scribe',
   );

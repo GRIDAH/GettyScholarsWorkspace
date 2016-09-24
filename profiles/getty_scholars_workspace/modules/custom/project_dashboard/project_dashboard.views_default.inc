@@ -25,10 +25,13 @@ function project_dashboard_views_default_views() {
   $handler->display->display_options['title'] = 'Recently Updated';
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['link_display'] = 'custom_url';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'reset filters';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -162,19 +165,11 @@ function project_dashboard_views_default_views() {
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['operator'] = 'not in';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'bibliography' => 'bibliography',
-    'comparison' => 'comparison',
-    'essay' => 'essay',
-    'image' => 'image',
-    'manuscript' => 'manuscript',
-    'page' => 'page',
+    'forum' => 'forum',
+    'project' => 'project',
   );
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['source_translation']['id'] = 'source_translation';
-  $handler->display->display_options['filters']['source_translation']['table'] = 'node';
-  $handler->display->display_options['filters']['source_translation']['field'] = 'source_translation';
-  $handler->display->display_options['filters']['source_translation']['operator'] = '1';
 
   /* Display: My Content Dashboard Block */
   $handler = $view->new_display('block', 'My Content Dashboard Block', 'block_my_content');
@@ -490,6 +485,7 @@ function project_dashboard_views_default_views() {
 
   /* Display: Recently Updated Project Block */
   $handler = $view->new_display('block', 'Recently Updated Project Block', 'block_recently_updated_project');
+  $handler->display->display_options['link_url'] = 'project';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -631,6 +627,16 @@ function project_dashboard_views_default_views() {
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type_1']['id'] = 'type_1';
+  $handler->display->display_options['filters']['type_1']['table'] = 'node';
+  $handler->display->display_options['filters']['type_1']['field'] = 'type';
+  $handler->display->display_options['filters']['type_1']['operator'] = 'not in';
+  $handler->display->display_options['filters']['type_1']['value'] = array(
+    'forum' => 'forum',
+    'project' => 'project',
+  );
+  $handler->display->display_options['filters']['type_1']['group'] = 1;
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
@@ -639,9 +645,11 @@ function project_dashboard_views_default_views() {
     'comparison' => 'comparison',
     'essay' => 'essay',
     'image' => 'image',
-    'manuscript' => 'manuscript',
     'page' => 'page',
+    'timeline_date' => 'timeline_date',
+    'manuscript' => 'manuscript',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['filters']['type']['exposed'] = TRUE;
   $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
   $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
@@ -653,16 +661,12 @@ function project_dashboard_views_default_views() {
     3 => 0,
   );
   $handler->display->display_options['filters']['type']['expose']['reduce'] = TRUE;
-  /* Filter criterion: Broken/missing handler */
-  $handler->display->display_options['filters']['source_translation']['id'] = 'source_translation';
-  $handler->display->display_options['filters']['source_translation']['table'] = 'node';
-  $handler->display->display_options['filters']['source_translation']['field'] = 'source_translation';
-  $handler->display->display_options['filters']['source_translation']['operator'] = '1';
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
   $handler->display->display_options['filters']['title']['field'] = 'title';
   $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
   $handler->display->display_options['filters']['title']['exposed'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';

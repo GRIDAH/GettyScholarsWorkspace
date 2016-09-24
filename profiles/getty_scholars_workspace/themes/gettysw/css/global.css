@@ -205,7 +205,10 @@ padding-top:20px;
 
 
 .region-branding {
-    margin: 5px 0;
+    margin: 20px 5px;
+}
+.site-name {
+    margin-top: 0;
 }
 .view-id-og_user_projects .views-row .views-field-title {
     position: absolute;
@@ -464,9 +467,9 @@ body.page-project-transcriptions .tool-trans {
     _border-color: #ffffff #000000 #000000 #000000;
     _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 }
-#my-projects-link {
+/*#my-projects-link {
     padding-bottom:10px;
-}
+}*/
 #my-projects-link:hover {
     text-decoration:none;
 }
@@ -523,7 +526,7 @@ body.page-project-transcriptions .tool-trans {
 #zone-menu .navigation {
     float: right;
     position: relative;
-    top: -24px;
+    top: -44px;
 }
 
 .node-type-essay .field-name-body {
@@ -610,7 +613,7 @@ h2.block-title {
     background: transparent url("../images/bg_direction_nav_white.png") no-repeat scroll 0px 0px;
 }
 
-/* Project selectors moved form custom module project-dashboard.css 
+/* Project selectors moved form custom module project-dashboard.css
    because of specificity issues. Perhaps move back later and reducd specificity
  */
 .views-field-title .project-selector {
@@ -1114,4 +1117,109 @@ body.not-logged-in #user-login {
     border: none;
     box-shadow: none;
     border-radius: 0;
+}
+
+.views-exposed-form .views-reset-button input,
+.views-exposed-form .views-reset-button input:hover,
+.views-exposed-form .views-reset-button input:active {
+    background: none;
+    border: 0 none;
+    color: #3998be;
+    font-size: 13px;
+    font-weight: normal;
+    height: 1.5em;
+    outline: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+#getty-expose-project-select-form {
+    color: #646f81;
+}
+
+.page-project-export .sticky-container {
+    background: white;
+    display: flex;
+    z-index: 10;
+}
+
+.page-project-export .sticky-container.stuck {
+    position: fixed;
+    top: 0;
+}
+
+.admin-menu.page-project-export .sticky-container.stuck {
+    margin-top: 20px;
+}
+
+.page-project-export .jump-menu {
+    align-items: center;
+    border-style: solid;
+    border-width: 1px 0 1px 1px;
+    display: flex;
+    flex-grow: 1;
+    padding: 0 1em;
+}
+
+.page-project-export .jump-menu a {
+    padding: 0 1em;
+}
+
+.page-project-export #edit-filter {
+    margin: 20px 0;
+}
+
+.page-project-export #edit-filter legend {
+    float: left;
+    margin-right: 1em;
+}
+
+.page-project-export #edit-filter .form-item {
+    float: left;
+    margin: 0 1em;
+    width: 25%;
+}
+
+.page-project-export #edit-filter .chosen-container {
+    width: 100% !important;
+}
+
+.page-project-export #edit-filter .chosen-container input {
+    box-sizing: content-box;
+    /*width: 200px !important;*/
+}
+
+.page-project-export #edit-filter .chosen-container-multi .chosen-choices {
+    border: 1px solid #646f81;
+}
+
+.page-project-export #edit-filter .chosen-container-multi .chosen-choices:after {
+    border-top: 6px solid;
+    border-right: 5px solid transparent;
+    border-bottom: 0px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    display: inline-block;
+    height: 0;
+    line-height: 0;
+    margin-left: 5px;
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 3px);
+    width: 0;
+}
+
+.page-project-export #edit-filter .form-item-search input {
+    border: 1px solid #646f81;
+    box-sizing: content-box;
+    width: 100%;
+}
+
+.views-field-field-image-reference-info .field-collection-view {
+    float: left;
+}
+
+.views-field-field-image-reference-info .field-collection-view img {
+    height: 100px;
+    width: auto;
 }

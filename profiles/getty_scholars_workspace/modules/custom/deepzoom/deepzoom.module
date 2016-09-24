@@ -119,7 +119,12 @@ function deepzoom_deliver() {
   // Setup level directory and temporary image.
   if (file_prepare_directory($level_dir, FILE_CREATE_DIRECTORY)) {
     if (file_exists("$level_dir/full.$extension")) {
+      set_error_handler(function() {
+        // Image load failed - reload page and try again
+        drupal_goto(current_path());
+      });
       $temp_image = image_load("$level_dir/full.$extension");
+      restore_error_handler();
     }
     else {
       $max_level = ceil(log(max($image->info['width'], $image->info['height'])) / log(2));

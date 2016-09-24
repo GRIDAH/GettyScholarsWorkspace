@@ -18,7 +18,15 @@ function scribe_og_scribe_entity_access($op, $entity = NULL, $account = NULL, $e
   // Otherwise we have something else, this would mean a field on an entity
   // type has been makred as being annotatable.  This happens in the context
   // of creating a new attachment.
-  if ($op == 'view' || $op == 'create') {
+  if ($op == 'create') {
+    // RestWS doesn't pass along the node being annotated - we have no way to check group permissions :(
+    return;
+  }
+  if ($op == 'view' && $entity_type == 'scribe_attachment') {
+    $parent_node = node_load($entity->entity_id);
+    if (@ $gid = $parent_node->og_group_ref[LANGUAGE_NONE][0]['target_id']) {
+      return og_user_access('node', $gid, 'view ' . $entity->annotation->type . ' annotations');
+    }
     return;
   }
   if ($entity_type == 'scribe_annotation') {

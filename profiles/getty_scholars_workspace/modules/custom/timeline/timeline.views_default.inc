@@ -24,7 +24,9 @@ function timeline_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Timeline';
   $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['type'] = 'og_context';
+  $handler->display->display_options['access']['perm'] = 'unsubscribe';
+  $handler->display->display_options['access']['group_id_arg'] = '1';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
@@ -32,35 +34,30 @@ function timeline_views_default_views() {
     'general' => array(
       'allow_secondary' => 0,
       'secondary_label' => 'Advanced options',
+      'collapsible_label' => NULL,
+      'combine_rewrite' => NULL,
+      'reset_label' => NULL,
     ),
+    'secondary_label' => NULL,
+    'collapsible_label' => NULL,
+    'combine_rewrite' => NULL,
+    'reset_label' => NULL,
   );
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '10';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'timelinejs';
-  $handler->display->display_options['style_options']['timeline_theme'] = array(
-    'width' => '100',
-    'width_unit' => '1',
-    'height' => '600',
-    'height_unit' => '0',
-  );
-  $handler->display->display_options['style_options']['timeline_fields'] = array(
-    'headline' => 'title',
-    'bodytext' => 'body',
-    'date' => 'field_timeline_dates',
-    'media' => 'field_timeline_media_image',
-    'credit' => '0',
-    'caption' => '0',
-    'tag' => '0',
-  );
-  $handler->display->display_options['style_options']['timeline_config'] = array(
-    'link_to_entity' => 1,
-    'link_text_enabled' => 0,
-    'link_text' => '',
-    'strip_tags' => '0',
-    'hash_bookmark' => '0',
-    'start_at_end' => '0',
-    'start_zoom_adjust' => '1',
-  );
+  $handler->display->display_options['style_options']['timeline_config']['hash_bookmark'] = TRUE;
+  $handler->display->display_options['style_options']['timeline_config']['start_at_end'] = 0;
+  $handler->display->display_options['style_options']['additional_config']['start_at_current'] = 0;
+  $handler->display->display_options['style_options']['timeline_fields']['caption'] = 'field_image_caption';
+  $handler->display->display_options['style_options']['timeline_fields']['credit'] = 'field_image_credit';
+  $handler->display->display_options['style_options']['timeline_fields']['media'] = 'field_timeline_media_image';
+  $handler->display->display_options['style_options']['timeline_fields']['start_date'] = 'field_timeline_start_date';
+  $handler->display->display_options['style_options']['timeline_fields']['end_date'] = 'field_timeline_end_date';
+  $handler->display->display_options['style_options']['timeline_fields']['display_date'] = 'field_timeline_end_date_1';
+  $handler->display->display_options['style_options']['timeline_fields']['text'] = 'body';
+  $handler->display->display_options['style_options']['timeline_fields']['headline'] = 'edit_node';
+  $handler->display->display_options['style_options']['timeline_fields']['unique_id'] = 'counter';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -78,41 +75,395 @@ function timeline_views_default_views() {
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title][edit_node]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Caption Text */
-  $handler->display->display_options['fields']['field_timeline_caption_text']['id'] = 'field_timeline_caption_text';
-  $handler->display->display_options['fields']['field_timeline_caption_text']['table'] = 'field_data_field_timeline_caption_text';
-  $handler->display->display_options['fields']['field_timeline_caption_text']['field'] = 'field_timeline_caption_text';
-  /* Field: Content: Dates */
-  $handler->display->display_options['fields']['field_timeline_dates']['id'] = 'field_timeline_dates';
-  $handler->display->display_options['fields']['field_timeline_dates']['table'] = 'field_data_field_timeline_dates';
-  $handler->display->display_options['fields']['field_timeline_dates']['field'] = 'field_timeline_dates';
-  $handler->display->display_options['fields']['field_timeline_dates']['settings'] = array(
-    'format_type' => 'mdy',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-  );
-  /* Field: Content: Media Image */
-  $handler->display->display_options['fields']['field_timeline_media_image']['id'] = 'field_timeline_media_image';
-  $handler->display->display_options['fields']['field_timeline_media_image']['table'] = 'field_data_field_timeline_media_image';
-  $handler->display->display_options['fields']['field_timeline_media_image']['field'] = 'field_timeline_media_image';
-  /* Field: Content: Media Link */
-  $handler->display->display_options['fields']['field_timeline_media_link']['id'] = 'field_timeline_media_link';
-  $handler->display->display_options['fields']['field_timeline_media_link']['table'] = 'field_data_field_timeline_media_link';
-  $handler->display->display_options['fields']['field_timeline_media_link']['field'] = 'field_timeline_media_link';
-  /* Field: Content: Body */
-  $handler->display->display_options['fields']['body_1']['id'] = 'body_1';
-  $handler->display->display_options['fields']['body_1']['table'] = 'field_data_body';
-  $handler->display->display_options['fields']['body_1']['field'] = 'body';
-  $handler->display->display_options['fields']['body_1']['type'] = 'text_plain';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['edit_node']['alter']['text'] = '[title]';
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['edit_node']['empty'] = '[title]';
   /* Field: Content: Body */
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
   $handler->display->display_options['fields']['body']['type'] = 'text_plain';
+  /* Field: Content: Start Date */
+  $handler->display->display_options['fields']['field_timeline_start_date']['id'] = 'field_timeline_start_date';
+  $handler->display->display_options['fields']['field_timeline_start_date']['table'] = 'field_data_field_timeline_start_date';
+  $handler->display->display_options['fields']['field_timeline_start_date']['field'] = 'field_timeline_start_date';
+  $handler->display->display_options['fields']['field_timeline_start_date']['click_sort_column'] = 'timestamp';
+  $handler->display->display_options['fields']['field_timeline_start_date']['settings'] = array(
+    'use_override' => 'none',
+    'format' => 'medium',
+    'component_settings' => array(
+      'meridiem' => 'a',
+      'year_designation' => 'ce',
+      'display' => array(
+        'year' => 'estimate_label',
+        'month' => 'estimate_label',
+        'day' => 'estimate_label',
+        'hour' => 'estimate_label',
+        'minute' => 'estimate_label',
+        'second' => 'estimate_label',
+        'timezone' => 'date_only',
+      ),
+      'separator' => array(
+        'date' => ' ',
+        'time' => ':',
+        'datetime' => ' ',
+        'other' => ' ',
+        'range' => '',
+      ),
+      'components' => array(
+        'year' => array(
+          'format' => 'Y-ce',
+          'empty' => '',
+          'weight' => '0',
+        ),
+        'month' => array(
+          'format' => 'M',
+          'empty' => '',
+          'weight' => '1',
+        ),
+        'day' => array(
+          'format' => 'j-S',
+          'empty' => '',
+          'weight' => '2',
+        ),
+        'hour' => array(
+          'format' => 'h',
+          'empty' => '',
+          'weight' => '3',
+        ),
+        'minute' => array(
+          'format' => 'i',
+          'empty' => '',
+          'weight' => '4',
+        ),
+        'second' => array(
+          'format' => 's',
+          'empty' => '',
+          'weight' => '5',
+        ),
+        'timezone' => array(
+          'format' => 'T',
+          'empty' => '',
+          'weight' => '6',
+        ),
+        'c1' => array(
+          'value' => '',
+          'weight' => '7',
+        ),
+        'c2' => array(
+          'value' => '',
+          'weight' => '8',
+        ),
+        'c3' => array(
+          'value' => '',
+          'weight' => '9',
+        ),
+        'approx' => array(
+          'value' => '',
+          'weight' => '-1',
+        ),
+      ),
+    ),
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: End Date */
+  $handler->display->display_options['fields']['field_timeline_end_date']['id'] = 'field_timeline_end_date';
+  $handler->display->display_options['fields']['field_timeline_end_date']['table'] = 'field_data_field_timeline_end_date';
+  $handler->display->display_options['fields']['field_timeline_end_date']['field'] = 'field_timeline_end_date';
+  $handler->display->display_options['fields']['field_timeline_end_date']['click_sort_column'] = 'timestamp';
+  $handler->display->display_options['fields']['field_timeline_end_date']['settings'] = array(
+    'use_override' => 'none',
+    'format' => 'medium',
+    'component_settings' => array(
+      'meridiem' => 'a',
+      'year_designation' => 'ce',
+      'display' => array(
+        'year' => 'estimate_label',
+        'month' => 'estimate_label',
+        'day' => 'estimate_label',
+        'hour' => 'estimate_label',
+        'minute' => 'estimate_label',
+        'second' => 'estimate_label',
+        'timezone' => 'date_only',
+      ),
+      'separator' => array(
+        'date' => ' ',
+        'time' => ':',
+        'datetime' => ' ',
+        'other' => ' ',
+        'range' => '',
+      ),
+      'components' => array(
+        'year' => array(
+          'format' => 'Y-ce',
+          'empty' => '',
+          'weight' => '0',
+        ),
+        'month' => array(
+          'format' => 'M',
+          'empty' => '',
+          'weight' => '1',
+        ),
+        'day' => array(
+          'format' => 'j-S',
+          'empty' => '',
+          'weight' => '2',
+        ),
+        'hour' => array(
+          'format' => 'h',
+          'empty' => '',
+          'weight' => '3',
+        ),
+        'minute' => array(
+          'format' => 'i',
+          'empty' => '',
+          'weight' => '4',
+        ),
+        'second' => array(
+          'format' => 's',
+          'empty' => '',
+          'weight' => '5',
+        ),
+        'timezone' => array(
+          'format' => 'T',
+          'empty' => '',
+          'weight' => '6',
+        ),
+        'c1' => array(
+          'value' => '',
+          'weight' => '7',
+        ),
+        'c2' => array(
+          'value' => '',
+          'weight' => '8',
+        ),
+        'c3' => array(
+          'value' => '',
+          'weight' => '9',
+        ),
+        'approx' => array(
+          'value' => '',
+          'weight' => '-1',
+        ),
+      ),
+    ),
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Start Date */
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['id'] = 'field_timeline_start_date_1';
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['table'] = 'field_data_field_timeline_start_date';
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['field'] = 'field_timeline_start_date';
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['label'] = 'Human Start Date';
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['click_sort_column'] = 'timestamp';
+  $handler->display->display_options['fields']['field_timeline_start_date_1']['settings'] = array(
+    'use_override' => 'none',
+    'format' => 'long',
+    'component_settings' => array(
+      'meridiem' => 'a',
+      'year_designation' => 'sign',
+      'display' => array(
+        'year' => 'date_or',
+        'month' => 'date_or',
+        'day' => 'date_or',
+        'hour' => 'date_or',
+        'minute' => 'date_or',
+        'second' => 'date_or',
+        'timezone' => 'date_only',
+      ),
+      'separator' => array(
+        'date' => '-',
+        'time' => ':',
+        'datetime' => ' ',
+        'other' => ' ',
+        'range' => '',
+      ),
+      'components' => array(
+        'year' => array(
+          'format' => 'Y-ce',
+          'empty' => '',
+          'weight' => '0',
+        ),
+        'month' => array(
+          'format' => 'm',
+          'empty' => '',
+          'weight' => '1',
+        ),
+        'day' => array(
+          'format' => 'd',
+          'empty' => '',
+          'weight' => '2',
+        ),
+        'hour' => array(
+          'format' => 'H',
+          'empty' => '',
+          'weight' => '3',
+        ),
+        'minute' => array(
+          'format' => 'i',
+          'empty' => '',
+          'weight' => '4',
+        ),
+        'second' => array(
+          'format' => 's',
+          'empty' => '',
+          'weight' => '5',
+        ),
+        'timezone' => array(
+          'format' => 'T',
+          'empty' => '',
+          'weight' => '6',
+        ),
+        'c1' => array(
+          'value' => '',
+          'weight' => '7',
+        ),
+        'c2' => array(
+          'value' => '',
+          'weight' => '8',
+        ),
+        'c3' => array(
+          'value' => '',
+          'weight' => '9',
+        ),
+        'approx' => array(
+          'value' => '',
+          'weight' => '-1',
+        ),
+      ),
+    ),
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: End Date */
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['id'] = 'field_timeline_end_date_1';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['table'] = 'field_data_field_timeline_end_date';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['field'] = 'field_timeline_end_date';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['label'] = 'Human End Date';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['alter']['text'] = '[field_timeline_start_date_1] - [field_timeline_end_date_1]';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['empty'] = '[field_timeline_start_date_1]';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['click_sort_column'] = 'timestamp';
+  $handler->display->display_options['fields']['field_timeline_end_date_1']['settings'] = array(
+    'use_override' => 'none',
+    'format' => 'long',
+    'component_settings' => array(
+      'meridiem' => 'a',
+      'year_designation' => 'sign',
+      'display' => array(
+        'year' => 'date_or',
+        'month' => 'date_or',
+        'day' => 'date_or',
+        'hour' => 'date_or',
+        'minute' => 'date_or',
+        'second' => 'date_or',
+        'timezone' => 'date_only',
+      ),
+      'separator' => array(
+        'date' => '-',
+        'time' => ':',
+        'datetime' => ' ',
+        'other' => ' ',
+        'range' => '',
+      ),
+      'components' => array(
+        'year' => array(
+          'format' => 'Y-ce',
+          'empty' => '',
+          'weight' => '0',
+        ),
+        'month' => array(
+          'format' => 'm',
+          'empty' => '',
+          'weight' => '1',
+        ),
+        'day' => array(
+          'format' => 'd',
+          'empty' => '',
+          'weight' => '2',
+        ),
+        'hour' => array(
+          'format' => 'H',
+          'empty' => '',
+          'weight' => '3',
+        ),
+        'minute' => array(
+          'format' => 'i',
+          'empty' => '',
+          'weight' => '4',
+        ),
+        'second' => array(
+          'format' => 's',
+          'empty' => '',
+          'weight' => '5',
+        ),
+        'timezone' => array(
+          'format' => 'T',
+          'empty' => '',
+          'weight' => '6',
+        ),
+        'c1' => array(
+          'value' => '',
+          'weight' => '7',
+        ),
+        'c2' => array(
+          'value' => '',
+          'weight' => '8',
+        ),
+        'c3' => array(
+          'value' => '',
+          'weight' => '9',
+        ),
+        'approx' => array(
+          'value' => '',
+          'weight' => '-1',
+        ),
+      ),
+    ),
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Timeline Image */
+  $handler->display->display_options['fields']['field_timeline_media_image']['id'] = 'field_timeline_media_image';
+  $handler->display->display_options['fields']['field_timeline_media_image']['table'] = 'field_data_field_timeline_media_image';
+  $handler->display->display_options['fields']['field_timeline_media_image']['field'] = 'field_timeline_media_image';
+  $handler->display->display_options['fields']['field_timeline_media_image']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_timeline_media_image']['settings'] = array(
+    'image_style' => 'large',
+    'image_link' => '',
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Image Caption */
+  $handler->display->display_options['fields']['field_image_caption']['id'] = 'field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['table'] = 'field_data_field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['field'] = 'field_image_caption';
+  $handler->display->display_options['fields']['field_image_caption']['settings'] = array(
+    'field_formatter_class' => '',
+  );
+  /* Field: Content: Image Credit */
+  $handler->display->display_options['fields']['field_image_credit']['id'] = 'field_image_credit';
+  $handler->display->display_options['fields']['field_image_credit']['table'] = 'field_data_field_image_credit';
+  $handler->display->display_options['fields']['field_image_credit']['field'] = 'field_image_credit';
+  $handler->display->display_options['fields']['field_image_credit']['settings'] = array(
+    'field_formatter_class' => '',
+  );
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
+  $handler->display->display_options['fields']['counter']['reverse'] = 0;
   /* Contextual filter: Field: Groups audience (og_group_ref) */
   $handler->display->display_options['arguments']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
   $handler->display->display_options['arguments']['og_group_ref_target_id']['table'] = 'og_membership';
@@ -142,15 +493,6 @@ function timeline_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'project/%/timeline';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'timeline_container';
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '5';
-  $handler->display->display_options['defaults']['header'] = FALSE;
   $export['project_timeline'] = $view;
 
   return $export;

@@ -10,7 +10,7 @@
 function manuscript_node_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-manuscript-body'
+  // Exported field_instance: 'node-manuscript-body'.
   $field_instances['node-manuscript-body'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -27,22 +27,21 @@ function manuscript_node_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
-          'trim_length' => 600,
         ),
-        'type' => 'text_summary_or_trimmed',
-        'weight' => 1,
+        'type' => 'text_default',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'node',
     'field_name' => 'body',
-    'label' => 'Body',
+    'label' => 'About this Transcription',
     'required' => 0,
     'settings' => array(
-      'display_summary' => 1,
+      'display_summary' => 0,
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -54,11 +53,11 @@ function manuscript_node_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_english'
+  // Exported field_instance: 'node-manuscript-field_english'.
   $field_instances['node-manuscript-field_english'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -76,9 +75,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 3,
       ),
     ),
     'entity_type' => 'node',
@@ -100,7 +102,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_facsimile'
+  // Exported field_instance: 'node-manuscript-field_facsimile'.
   $field_instances['node-manuscript-field_facsimile'] = array(
     'bundle' => 'manuscript',
     'deleted' => 0,
@@ -122,10 +124,10 @@ function manuscript_node_field_default_field_instances() {
         'settings' => array(
           'field_formatter_class' => '',
           'image_link' => '',
-          'image_style' => 'thumbnail',
+          'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 0,
+        'weight' => 1,
       ),
     ),
     'entity_type' => 'node',
@@ -162,7 +164,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_french'
+  // Exported field_instance: 'node-manuscript-field_french'.
   $field_instances['node-manuscript-field_french'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -180,9 +182,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 9,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 6,
       ),
     ),
     'entity_type' => 'node',
@@ -204,7 +209,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_german'
+  // Exported field_instance: 'node-manuscript-field_german'.
   $field_instances['node-manuscript-field_german'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -222,9 +227,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 5,
       ),
     ),
     'entity_type' => 'node',
@@ -246,7 +254,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_hebrew'
+  // Exported field_instance: 'node-manuscript-field_hebrew'.
   $field_instances['node-manuscript-field_hebrew'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -264,9 +272,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 7,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 9,
       ),
     ),
     'entity_type' => 'node',
@@ -288,7 +299,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_italian'
+  // Exported field_instance: 'node-manuscript-field_italian'.
   $field_instances['node-manuscript-field_italian'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -306,9 +317,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 6,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
@@ -330,7 +344,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_latin'
+  // Exported field_instance: 'node-manuscript-field_latin'.
   $field_instances['node-manuscript-field_latin'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -348,9 +362,12 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
+        'weight' => 8,
       ),
     ),
     'entity_type' => 'node',
@@ -372,7 +389,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_spanish'
+  // Exported field_instance: 'node-manuscript-field_spanish'.
   $field_instances['node-manuscript-field_spanish'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -390,8 +407,11 @@ function manuscript_node_field_default_field_instances() {
       ),
       'teaser' => array(
         'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'text',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'text_default',
         'weight' => 4,
       ),
     ),
@@ -414,7 +434,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_tags'
+  // Exported field_instance: 'node-manuscript-field_tags'.
   $field_instances['node-manuscript-field_tags'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -422,19 +442,22 @@ function manuscript_node_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'taxonomy',
         'settings' => array(
           'field_formatter_class' => '',
         ),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 5,
+        'label' => 'inline',
+        'module' => 'taxonomy',
+        'settings' => array(
+          'field_formatter_class' => '',
+        ),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
       ),
     ),
     'entity_type' => 'node',
@@ -449,11 +472,11 @@ function manuscript_node_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 6,
+      'weight' => 4,
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-field_transcription'
+  // Exported field_instance: 'node-manuscript-field_transcription'.
   $field_instances['node-manuscript-field_transcription'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -474,9 +497,8 @@ function manuscript_node_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(
           'field_formatter_class' => '',
-          'trim_length' => 600,
         ),
-        'type' => 'text_trimmed',
+        'type' => 'text_default',
         'weight' => 2,
       ),
     ),
@@ -499,7 +521,7 @@ function manuscript_node_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-manuscript-og_group_ref'
+  // Exported field_instance: 'node-manuscript-og_group_ref'.
   $field_instances['node-manuscript-og_group_ref'] = array(
     'bundle' => 'manuscript',
     'default_value' => NULL,
@@ -510,7 +532,7 @@ function manuscript_node_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -553,13 +575,13 @@ function manuscript_node_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Body');
+  t('About this Transcription');
   t('English');
   t('Facsimile');
   t('French');

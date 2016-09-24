@@ -19,16 +19,8 @@ function lighttable_image_default_styles() {
 
   // Exported image style: lighttable_main.
   $styles['lighttable_main'] = array(
-    'name' => 'lighttable_main',
     'effects' => array(
       2 => array(
-        'label' => 'Scale',
-        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
-        'effect callback' => 'image_scale_effect',
-        'dimensions callback' => 'image_scale_dimensions',
-        'form callback' => 'image_scale_form',
-        'summary theme' => 'image_scale_summary',
-        'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
           'width' => 450,
@@ -38,13 +30,6 @@ function lighttable_image_default_styles() {
         'weight' => 1,
       ),
       3 => array(
-        'label' => 'Scale',
-        'help' => 'Scaling will maintain the aspect-ratio of the original image. If only a single dimension is specified, the other dimension will be calculated.',
-        'effect callback' => 'image_scale_effect',
-        'dimensions callback' => 'image_scale_dimensions',
-        'form callback' => 'image_scale_form',
-        'summary theme' => 'image_scale_summary',
-        'module' => 'image',
         'name' => 'image_scale',
         'data' => array(
           'width' => '',
@@ -59,25 +44,40 @@ function lighttable_image_default_styles() {
 
   // Exported image style: lighttable_thumb.
   $styles['lighttable_thumb'] = array(
-    'name' => 'lighttable_thumb',
+    'label' => 'lighttable_thumb',
     'effects' => array(
-      5 => array(
-        'label' => 'Resize',
-        'help' => 'Resizing will make images an exact set of dimensions. This may cause images to be stretched or shrunk disproportionately.',
-        'effect callback' => 'image_resize_effect',
-        'dimensions callback' => 'image_resize_dimensions',
-        'form callback' => 'image_resize_form',
-        'summary theme' => 'image_resize_summary',
-        'module' => 'image',
-        'name' => 'image_resize',
+      3 => array(
+        'name' => 'image_scale',
         'data' => array(
-          'width' => 75,
-          'height' => 75,
+          'width' => 100,
+          'height' => 100,
+          'upscale' => 1,
         ),
-        'weight' => 2,
+        'weight' => -10,
+      ),
+      2 => array(
+        'name' => 'canvasactions_definecanvas',
+        'data' => array(
+          'RGB' => array(
+            'HEX' => '',
+          ),
+          'under' => 1,
+          'exact' => array(
+            'width' => 100,
+            'height' => 100,
+            'xpos' => 'center',
+            'ypos' => 'center',
+          ),
+          'relative' => array(
+            'leftdiff' => '',
+            'rightdiff' => '',
+            'topdiff' => '',
+            'bottomdiff' => '',
+          ),
+        ),
+        'weight' => -9,
       ),
     ),
-    'label' => 'lighttable_thumb',
   );
 
   return $styles;

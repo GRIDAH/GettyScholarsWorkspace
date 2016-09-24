@@ -10,7 +10,7 @@
 function shared_field_bases_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'taxonomy_term-tags-og_group_ref'
+  // Exported field_instance: 'taxonomy_term-tags-og_group_ref'.
   $field_instances['taxonomy_term-tags-og_group_ref'] = array(
     'bundle' => 'tags',
     'default_value' => NULL,
@@ -30,10 +30,11 @@ function shared_field_bases_field_default_field_instances() {
     'entity_type' => 'taxonomy_term',
     'field_name' => 'og_group_ref',
     'label' => 'Groups audience',
-    'required' => FALSE,
+    'required' => 1,
     'settings' => array(
       'behaviors' => array(
         'og_widget' => array(
+          'access_override' => 0,
           'admin' => array(
             'widget_type' => 'entityreference_autocomplete',
           ),
@@ -58,6 +59,7 @@ function shared_field_bases_field_default_field_instances() {
       ),
     ),
     'widget' => array(
+      'active' => 0,
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',

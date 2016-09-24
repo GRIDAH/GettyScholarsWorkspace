@@ -73,10 +73,18 @@
   border: solid 1px #000;
 }
 
-.lighttable-image-container {
+div.lighttable-image-container {
   background-color: #fff;
   border: solid 1px #000;
-  padding: 10px 10px 26px;
+  margin: 0;
+  padding: 5px 10px;
+}
+
+.lighttable-image-container img {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
 }
 
 .lighttable-image-container .ui-state-disabled {
@@ -85,18 +93,6 @@
 }
 
 /* Links for images within the LightTable */
-.lighttable-links,
-.lighttable-crop-links {
-  bottom: 0;
-  box-sizing: border-box;
-  height: 36px;
-  left: 0;
-  overflow: hidden;
-  padding: 10px;
-  position: absolute;
-  width: 100%;
-}
-
 .lighttable-links .remove-link,
 .lighttable-crop-links .crop-cancel-link {
   cursor: pointer;
@@ -218,7 +214,7 @@
 }
 
 .views-exposed-form .views-exposed-widget input.form-submit {
-  margin-top: 0;
+  margin-top: 1em;
   border-radius: 5px;
   padding: 4px 6px;
 }

@@ -13,10 +13,10 @@ function essay_node_menu() {
   $items['project/%/essays'] = array(
     'title' => 'Essays',
     'title callback' => 'essay_node_page_title_callback',
-    'page callback' => 'essay_node_list',
-    'page arguments' => array(1),
-    'access callback' => 'essay_node_access_essay_list',
-    'access arguments' => array(1),
+    'page callback' => 'views_embed_view',
+    'page arguments' => array('essays', 'block_essays_list', 1),
+    'access callback' => 'og_user_access',
+    'access arguments' => array('node', 1, 'unsubscribe'),
   );
 
   return $items;
@@ -29,30 +29,13 @@ function essay_node_page_title_callback($title) {
   return $group->title . ' ' . $title;
 }
 
-function essay_node_access_essay_list($gid) {
-  if (og_is_member('node', $gid)) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-function essay_node_list($gid) {
-  if ($gid) {
-    $output = views_embed_view('essays', 'block_essays_list', $gid);
-    return $output;
-  }
-}
-
-
 /**
  * Implements hook_views_pre_view().
  */
 function essay_node_views_pre_view(&$view) {
   if ($view->name == 'essays' && $view->current_display == 'block_essays_list') {
-    if (node_access('create', 'essay')) {
-      $project_nid = arg(1);
+    $project_nid = arg(1);
+    if (og_user_access('node', $project_nid, 'create essay content')) {
       $view->attachment_before = l(t('Add new essay'), "node/add/essay/$project_nid");
     }
   }

@@ -17,7 +17,7 @@ function project_dashboard_menu() {
     'access callback' => TRUE,
   );
 
-  $items['project/%'] = array(
+  $items['project/%node'] = array(
     'title' => '',
     'page callback' => 'project_dashboard_show_dashboard',
     'page arguments' => array(1),
@@ -31,6 +31,7 @@ function project_dashboard_menu() {
  * Implements hook_init().
  */
 function project_dashboard_init() {
+  global $user;
   libraries_load('flexslider');
   drupal_add_js(drupal_get_path('module', 'project_dashboard') . '/project-dashboard.js');
   drupal_add_css(drupal_get_path('module', 'project_dashboard') . '/project-dashboard.css');
@@ -60,7 +61,7 @@ function project_dashboard_theme_registry_alter(&$theme_registry) {
   $theme_registry_copy = $theme_registry;       // munge on a copy
   _theme_process_registry($theme_registry_copy, 'phptemplate', 'theme_engine', 'pow', $mod_path);
   $theme_registry += array_diff_key($theme_registry_copy, $theme_registry);
-  
+
   // Register this module for the search results templates.
   $theme_registry['search_results']['template'] = $mod_path . '/templates/search-results';
   $theme_registry['search_results']['theme path'] = $mod_path;
@@ -165,29 +166,15 @@ function project_dashboard_get_project_toolbar() {
       }
     }
 
-    $project_path = variable_get('getty_expose_project_service_url', 'service/projects');
-    $project_download = '';
-    $user_access = _getty_expose_project_access_handler();
-
-    //only add the download link if the path is active
-    if (!empty($project_path) && $user_access) {
-        //creates the path
-        $download_link = l('Download Project', $project_path . '/xml', array(
-            'query' => array(
-                'download' => TRUE,
-                'project' => $gid,
-            )
-        ));
-
-        //creates wrapper for the link
-        $project_download = theme('html_tag', array(
-            'element' => array(
-                '#tag' => 'div',
-                '#value' => $download_link,
-                '#attributes' => array(
-                    'class' => 'dashboard-link',
-                ))));
-    }
+    $project_download = '
+      <div class="dashboard-link dropdown-container">
+        <a href="#" class="dropdown-trigger">' . t('Export Project') . '</a>
+        <div class="dropdown-content">
+          ' . l(t('Entire Project'), "project/$gid/export/all/json") . '
+          ' . l(t('Selected Content'), "project/$gid/export") . '
+        </div>
+      </div>
+    ';
 
     if ($gid) {
         $block['content'] .= '</div></div><div class="dashboard-link" id="forum-link">' . l(t('Forum'), 'project/' . $gid . '/forums') . '</div>' . $project_download . '</div>';
@@ -286,7 +273,7 @@ function project_dashboard_get_group() {
   $forum_add_pattern = '/^node\/add\/forum\/[0-9]+\/[0-9]+/';
   $node_pattern = '/^node\/[0-9]+/';
   $gid = FALSE;
-  
+
   if (preg_match($group_pattern, $url) || preg_match($project_pattern, $url)) {
     $gid = $url_piece[1];
   }
@@ -353,19 +340,19 @@ function project_dashboard_theme() {
   );
 }
 
-function project_dashboard_show_dashboard($gid = NULL) {
+function project_dashboard_show_dashboard($group = NULL) {
   global $user;
-  
+
+  $gid = (!empty($group) ? $group->nid : NULL);
+
   if ($user->uid == 0) {
     drupal_goto('user');
   }
+  elseif (!empty($gid) && !og_user_access('node', $gid, 'unsubscribe')) {
+    drupal_goto('dashboard');
+  }
   else {
-    if (isset($gid) && !og_is_member('node', $gid)) {
-      drupal_goto('dashboard');
-    }
-    else {
-      return project_dashboard_display($gid);
-    }
+    return project_dashboard_display($gid);
   }
 }
 
@@ -388,7 +375,7 @@ function project_dashboard_display($gid = NULL) {
     else {
       $description = '';
     }
-    
+
     drupal_add_js(drupal_get_path('module', 'project_dashboard') . '/jquery.expander.min.js');
 
 
@@ -424,7 +411,7 @@ function _project_dashboard_get_project() {
 }
 
 /**
- * Implements hook_form_FORMNAME_alter(). 
+ * Implements hook_form_FORMNAME_alter().
  * Changes submit button to use search image.
  */
 function project_dashboard_form_search_block_form_alter(&$form, &$form_state) {
@@ -448,7 +435,7 @@ function project_dashboard_form_alter(&$form, &$form_state, $form_id) {
       // Add cancel button
       $form['actions']['cancel'] = array(
       '#markup' => l(t('Cancel'), 'project/' . $gid),
-      '#weight' => 20, 
+      '#weight' => 20,
     );
     }
   }
@@ -457,7 +444,7 @@ function project_dashboard_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Note: This is mainly an override of translation_node_overview. The only
  * modification is adding the gid in the link.
- * 
+ *
  * Page callback: Displays a list of a node's translations.
  *
  * @param $node
