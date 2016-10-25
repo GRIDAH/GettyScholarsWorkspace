@@ -10,7 +10,7 @@ Installation instructions are in `INSTALL.md`.
 
 ## Documentation
 
-[User Guide](http://www.getty.edu/research/scholars/digital_art_history/getty_scholars_workspace/index.html)
+[User Guide](http://www.getty.edu/research/scholars/digital_art_history/getty_scholars_workspace/user_guide_1.1.pdf)
 
 ## About
 
